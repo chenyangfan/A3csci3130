@@ -2,14 +2,37 @@
   "rules": {
     ".read": "true",
     ".write": "true",
+    ".validate": "newData.hasChildren(['name','email','Primary Business','number'])",
     "contacts": {
             "$contact": {
                 "name": {
-                    ".validate": "newData.isString() && newData.val().length < 50"
+                    ".validate": "newData.isString() && newData.val().length <= 48 && newData.val().length >=2"
                 },
                 "email": {
                     ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
-                }
+                },
+
+              "number": {
+                ".validate": "newData.isNumber() && newData.val().length ==  9"
+              },
+
+              "Primary Business": {
+                ".validate": "newData.val().matches(/^Fisher$/)||newData.val().matches(/^Distributor$/)||newData.val().matches(/^Processor$/)||newData.val().matches(/^Fish Monger$/)"
+              },
+
+              "Address": {
+                ".validate": "newData.val().length < 50"
+              },
+
+              "Province/Territory": {
+                "prov":["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT",""],
+
+                ".validate": "newData.val().matches(AB)||newData.val().matches(BC)||newData.val().matches(MB)||newData.val().matches(NB)||newData.val().matches(NL)||newData.val().matches(NS)||newData.val().matches(NT)||newData.val().matches(NU)||newData.val().matches(ON)||newData.val().matches(PE)||newData.val().matches(QC)||newData.val().matches(SK)||newData.val().matches(YT)||newData.val().matches()"
+              }
+
+
+
+
             }
         }
   }
